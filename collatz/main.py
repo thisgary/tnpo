@@ -18,22 +18,34 @@ x: Any positive integer
 If x is even, divide by 2,
 if x is odd, 3x + 1.
 '''
-def collatz_function(x):
+def function(x):
     return x//2 if x%2 == 0 else linear(x)
 
-# Collatz Conjecture
-def collatz_conjecture(x):
-    step, steps, hike, peak, peaks, height = [], 0, 0, [], 0, 0
+# Collatz Sequence
+'''
+step    : No. of steps for sequence to reach 1
+spike   : No. of spikes in sequence (^^^)
+s_height: Value of spike
+peak    : Max s_height in sequence
+p_step  : No. of steps for sequence to reach peak
+'''
+def sequence(x):
+    steps, spikes = [], []
+    step, spike = 0, 0
+    s_height = 0
+    peak, p_step = 0, 0
     while x != 1:
-        y = collatz_function(x)
-        step.append(y)
-        steps += 1
-        if y > peak:
-            hike = steps
-            height = y
+        y = function(x)
+        steps.append(y)
+        step += 1
+        if y > s_height: s_height = y
         else:
-            peak.append(height)
-            peaks += 1
+            spikes.append(s_height)
+            spike += 1
+            if s_height > peak:
+                peak = s_height
+                p_step = step
+            s_height = 0
         x = y
-    return step, steps, hike, peak, peaks, height
+    return steps, spikes, step, spike, peak, p_step
 
