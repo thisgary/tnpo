@@ -23,14 +23,17 @@ def collatz_function(x):
 
 # Collatz Conjecture
 def collatz_conjecture(x):
-    step, steps, hike, peak = [], 0, 0, 0
+    step, steps, hike, peak, peaks, height = [], 0, 0, [], 0, 0
     while x != 1:
         y = collatz_function(x)
         step.append(y)
         steps += 1
         if y > peak:
             hike = steps
-            peak = y
+            height = y
+        else:
+            peak.append(height)
+            peaks += 1
         x = y
-    return step, steps, hike, peak
+    return step, steps, hike, peak, peaks, height
 
