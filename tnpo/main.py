@@ -25,28 +25,38 @@ def function(x):
 '''
 steps: No. of steps for sequence to reach 1
 '''
-def sequence(x):
+def sequence(n):
     step, steps = [], 0
-    while x != 1:
-        y = function(x)
-        step.append(y)
+    while n != 1:
+        m = function(n)
+        step.append(m)
         steps += 1
-        x = y
+        n = m
     return step, steps
 
+# Peak Function
 '''
-spike   : No. of spikes in sequence (^^^)
-s_height: Value of spike
-peak    : Max s_height in sequence
-p_step  : No. of steps for sequence to reach peak
+peak: Max spike value in sequence
+step: No. of steps for sequence to reach peak
+'''
+def peak_func(ys, peak=0, step=0):
+    if len(ys) > 0:
+        peak = max(peak, ys[0])
+        return peak_func(ys[1:], peak, step+1)
+    else: return peak, step
 
-        if y > s_height: s_height = y
-        else:
-            spikes.append(s_height)
-            spike += 1
-            if s_height > peak:
-                peak = s_height
-                p_step = step
-            s_height = 0
+# Spike Function
 '''
+spikes   : Spikes in sequence (^^^)
+intervals: No. of steps between consecutive spikes
+'''
+def spike_func(ys, spikes=[], intervals=[], s=0, i=0):
+    if len(ys) > 0:
+        if ys[0] > s:
+            return spike_func(ys[1:], spikes, intervals, ys[0], i+1)
+        else:
+            intervals.append(i)
+            spikes.append(s)
+            return spike_func(ys[1:], spikes, intervals)
+    else: return spikes, intervals
 
