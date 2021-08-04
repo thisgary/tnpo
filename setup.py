@@ -1,10 +1,10 @@
 from setuptools import setup
 
 setup(
-        name='Collatz',
-        packages=['collatz'],
-        version='0.0-6-g2762893',
-        description='The cursed Collatz conjecture library.',
+        name='3n+1',
+        packages=['tnpo'],
+        version='0.0-9-gbbcd75c',
+        description='The cursed 3n+1 problem library.',
         author='thisgary',
         license='MIT',
         install_requires=[],
