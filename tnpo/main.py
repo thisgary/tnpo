@@ -50,12 +50,14 @@ def peak_func(ys, peak=0, step=0):
 spikes   : Spikes in sequence (^^^)
 intervals: No. of steps between consecutive spikes
 '''
-def spike_func(ys, spikes=[], intervals=[], i=0):
-    if len(ys) > 3:
-        if ys[0]<ys[1]>ys[2]:
-            spikes.append(ys[1])
+def spike_func(ys, spikes=[], intervals=[], l=0, i=1):
+    if len(ys) > 2:
+        y = ys.pop(0)
+        if l < y > ys[0]:
+            spikes.append(y)
             intervals.append(i)
-            return spike_func(ys[3:], spikes, intervals)
-        else: return spike_func(ys[1:], spikes, intervals, i+1)
+            l = 0; i = 1; ys.pop(0)
+        else: l = y; i += 1
+        return spike_func(ys, spikes, intervals, l, i)
     else: return spikes, intervals
 
