@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
         name='Collatz',
         packages=['collatz'],
-        version='0.0',
+        version='0.0-1-g621e8da',
         description='The cursed Collatz conjecture library.',
         author='thisgary',
         license='MIT',
