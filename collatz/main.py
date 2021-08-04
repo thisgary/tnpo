@@ -19,7 +19,7 @@ If x is even, divide by 2,
 if x is odd, 3x + 1.
 '''
 def collatz_function(x):
-    return x/2 if x%2 == 0 else linear(x)
+    return x//2 if x%2 == 0 else linear(x)
 
 # Collatz Conjecture
 def collatz_conjecture(x):
