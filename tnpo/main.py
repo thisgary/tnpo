@@ -1,4 +1,8 @@
 # common math functions
+''' y = mx + c '''
+def linear(x, m=3, c=1):
+    return m*x + c
+
 ''' Long division by 2 '''
 def ld2(x):
     return x if x%2 != 0 else ld2(x//2)
@@ -6,11 +10,6 @@ def ld2(x):
 ''' Is y 2 power n '''
 def is_2n(y):
     return ld2(y) == 1
-
-''' y = mx + c '''
-def linear(x, m=3, c=1):
-    return m*x + c
-
 # 3n+1 problem function
 '''
 f(n) = {n//2, x%2=0; 
@@ -24,7 +23,7 @@ if x is odd, 3x + 1.
 def function(x):
     return x//2 if x%2 == 0 else linear(x)
 
-# 3n+1 problem sequence
+# 3n+1 problem sequence function
 '''
 step: No. of steps for sequence to reach 1
 '''
@@ -35,18 +34,28 @@ def sequence(n):
         step.append(n)
     return step
 
-# Peak function
+# Node function
 '''
-peak: Max value in sequence
-step: No. of steps to reach peak
+child : 
+parent:  
 '''
-def peak_func(s):
-    peak = max(s)
-    step = s.index(peak) - 1
-    return peak, step
+def node(child):
+    if child%2 == 1: n = linear(child)
+    parent = ld2(n)
+    return parent
 
-# Next cycle
-def halt(n):
-    n = function(n)
-    return ld2(n)
+def draw_tree(nodes):
+    nodes.sort()
+    tree = []
+    childs = []
+    c_parent = 0
+    for node in nodes:
+        parent, child = node
+        if len(childs) > 0:
+            if parent == c_parent: childs.append(child)
+            else:
+                childs.sort()
+                tree.append((parent,childs))
+        else: c_parent, childs = parent, [child]
+    return tree
 
