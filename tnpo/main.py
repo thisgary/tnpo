@@ -39,25 +39,31 @@ def sequence(n):
 peak: Max spike value in sequence
 step: No. of steps for sequence to reach peak
 '''
-def peak_func(ys, peak=0, step=0):
-    if len(ys) > 0:
-        peak = max(peak, ys[0])
-        return peak_func(ys[1:], peak, step+1)
-    else: return peak, step
+def peak_func(ys):
+    def aux(xs, peak, p_step):
+        if len(xs) > 0:
+            peak = max(peak, xs[0])
+            return aux(xs[1:], peak, p_step+1)
+        else: return peak, step
+    # Tail trimming [16, 8, 4, 2, 1]
+    return aux(ys[:-5], 0, 0)
 
 # Spike Function
 '''
-spikes   : Spikes in sequence (^^^)
-intervals: No. of steps between consecutive spikes
+spikes: Spikes in sequence (^^^)
+steps : Steps between consecutive spikes
 '''
-def spike_func(ys, spikes=[], intervals=[], l=0, i=1):
-    if len(ys) > 2:
-        y = ys.pop(0)
-        if l < y > ys[0]:
-            spikes.append(y)
-            intervals.append(i)
-            l = 0; i = 1; ys.pop(0)
-        else: l = y; i += 1
-        return spike_func(ys, spikes, intervals, l, i)
-    else: return spikes, intervals
+def spike_func(ys):
+    def aux(xs, spikes, steps, i):
+        if len(xs) > 2:
+            a, b, c = xs[:3]
+            if a < b > c:
+                spikes.append(b)
+                steps.append(i)
+                xs, i = xs[1:], 1
+            else: i += 1
+            return aux(xs[1:], spikes, steps, i)
+        else: return spikes, steps
+    # Tail trimming [4, 2, 1]
+    return aux(ys[:-3], [], [], 1)
 
