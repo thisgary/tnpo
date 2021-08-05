@@ -1,8 +1,11 @@
 # common math functions
-''' y = x^n '''
-def is_power(y, x=2):
-    while x%2 == 0: y //= x
-    return y == 1
+''' Long division by 2 '''
+def ld2(x):
+    return x if x%2 != 0 else ld2(x//2)
+
+''' Is y 2 power n '''
+def is_2n(y):
+    return ld2(y) == 1
 
 ''' y = mx + c '''
 def linear(x, m=3, c=1):
@@ -35,23 +38,15 @@ def sequence(n):
 # Peak function
 '''
 peak: Max value in sequence
-step: No. of steps for sequence to reach peak
+step: No. of steps to reach peak
 '''
 def peak_func(s):
     peak = max(s)
     step = s.index(peak) - 1
     return peak, step
 
-# Odd function
-'''
-odds: Odd numbers in sequence (^^^)
-'''
-def odd_func(s):
-    odds = []
-    while len(s) > 0:
-        n, s = s[0], s[1:]
-        if y%2 == 1:
-            odds.append(n)
-            s = s[1:]
-    return odds
- 
+# Next cycle
+def halt(n):
+    n = function(n)
+    return ld2(n)
+
