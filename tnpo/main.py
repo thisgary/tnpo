@@ -1,7 +1,7 @@
 # common math functions
 ''' y = x^n '''
 def is_power(y, x=2):
-    while y%x == 0: y //= x
+    while x%2 == 0: y //= x
     return y == 1
 
 ''' y = mx + c '''
@@ -39,24 +39,19 @@ step: No. of steps for sequence to reach peak
 '''
 def peak_func(s):
     peak = max(s)
-    step = s.index(peak)
+    step = s.index(peak) - 1
     return peak, step
 
-# Spike function
+# Odd function
 '''
-spikes: Spikes in sequence (^^^)
-steps : Steps between spikes
+odds: Odd numbers in sequence (^^^)
 '''
-def spike_func(s):
-    def aux(xs, spikes, steps, i):
-        if len(xs) > 2:
-            a, b, c = xs[:3]
-            if a < b > c:
-                spikes.append(b)
-                steps.append(i)
-                xs, i = xs[1:], 1
-            else: i += 1
-            return aux(xs[1:], spikes, steps, i)
-        else: return spikes, steps
-    return aux(s[:-3], [], [], 1)
-
+def odd_func(s):
+    odds = []
+    while len(s) > 0:
+        n, s = s[0], s[1:]
+        if y%2 == 1:
+            odds.append(n)
+            s = s[1:]
+    return odds
+ 
