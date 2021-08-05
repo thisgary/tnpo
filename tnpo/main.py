@@ -8,7 +8,7 @@ def is_power(y, x=2):
 def linear(x, m=3, c=1):
     return m*x + c
 
-# 3n+1 Problem Statement
+# 3n+1 problem function
 '''
 f(n) = {n//2, x%2=0; 
         3n+1, x%2=1}
@@ -21,39 +21,33 @@ if x is odd, 3x + 1.
 def function(x):
     return x//2 if x%2 == 0 else linear(x)
 
-# 3n+1 Problem Sequence
+# 3n+1 problem sequence
 '''
-steps: No. of steps for sequence to reach 1
+step: No. of steps for sequence to reach 1
 '''
 def sequence(n):
-    step, steps = [], 0
+    step = [n]
     while n != 1:
-        m = function(n)
-        step.append(m)
-        steps += 1
-        n = m
-    return step, steps
+        n = function(n)
+        step.append(n)
+    return step
 
-# Peak Function
+# Peak function
 '''
-peak: Max spike value in sequence
+peak: Max value in sequence
 step: No. of steps for sequence to reach peak
 '''
-def peak_func(ys):
-    def aux(xs, peak, p_step):
-        if len(xs) > 0:
-            peak = max(peak, xs[0])
-            return aux(xs[1:], peak, p_step+1)
-        else: return peak, step
-    # Tail trimming [16, 8, 4, 2, 1]
-    return aux(ys[:-5], 0, 0)
+def peak_func(s):
+    peak = max(s)
+    step = s.index(peak)
+    return peak, step
 
-# Spike Function
+# Spike function
 '''
 spikes: Spikes in sequence (^^^)
-steps : Steps between consecutive spikes
+steps : Steps between spikes
 '''
-def spike_func(ys):
+def spike_func(s):
     def aux(xs, spikes, steps, i):
         if len(xs) > 2:
             a, b, c = xs[:3]
@@ -64,6 +58,5 @@ def spike_func(ys):
             else: i += 1
             return aux(xs[1:], spikes, steps, i)
         else: return spikes, steps
-    # Tail trimming [4, 2, 1]
-    return aux(ys[:-3], [], [], 1)
+    return aux(s[:-3], [], [], 1)
 
