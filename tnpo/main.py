@@ -39,13 +39,14 @@ def a(n):
 # Node
 def parent(c):
     p = 3*c+1
-    while c%2==0: p//=2
+    while e(p): p//=2
     return p
 
 def child(p):
     c = 2*p-1
-    if c%3==0: return c//=3
+    if c%3==0: c//=3
     else: raise NoChildException(p)
+    return c
 
 def draw_tree(nodes):
     nodes.sort()
