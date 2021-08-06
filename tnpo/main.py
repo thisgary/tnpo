@@ -1,52 +1,38 @@
-# Function
-def y(x, m=3, c=1): return m*x+c # Linear
-
 # 3n+1 Problem Function
 '''
-n: {int n, n > 0}
+n = 1, 2, 3...
 
-f(n) = {n/2, if n%2=0; 
-       3n+1, if n%2=1}
+f(n): if n even, halve it;
+else, triple it and add 1. 
 
-s(n) = {n/2, if n%2=0; 
-     f(n)/2, if n%2=1}
+s(n): if n even, halve it;
+else, f(n), then halve it.      
 '''
-def f(n): return n//2 if n%2==0 else y(n)
-def s(n): return n//2 if n%2==0 else y(n)//2
+def f(n, s=False):
+    if n % 2: return n//2
+    else:
+        n = n * 3 + 1
+        if s: n //= 2
+        return n
 
 # Relationship Function
-def R(n): 
-    rel = {'n': n, 'c': 2*n}
-    if n%6 == 4: rel['p'] = (n-1)//3
-    return rel
+def R(n, s=False):
+    c = 2 * n # Child
+    r = { c }
+    m = 2 if s else 1
+    if n % (6 // m) == 4 // m:
+        p = (m * n - 1) // 3
+        r.add(p) # Parent
+    return r
 
-# Sequence
+# Sequence Function
 '''
-ai = {n, for i=0;
-f(ai-1), for i>0}
-
-i = len(seq) - 1
+a(n) = while n not 1, append f(n)
 '''
-def a(n, f=f):
-    seq = [n]
+def a(n, s=False):
+    l = [n]
     while n != 1:
-        n = f(n)
-        seq.append(n)
-    return seq
-
-def draw_tree(nodes):
-    nodes.sort()
-    tree, childs = [], []
-    c_parent = 0
-    for node in nodes:
-        parent, child = node
-        if childs:
-            if parent == c_parent: childs.append(child)
-            else:
-                childs.sort()
-                node = c_parent, childs
-                tree.append(node)
-                c_parent, childs = parent, [child]
-        else: c_parent, childs = parent, [child]
-    return tree
+        n = f(n, s)
+        l.append(n)
+    return l
 
