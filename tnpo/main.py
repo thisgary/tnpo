@@ -9,7 +9,7 @@ s(n): if n even, halve it;
 else, f(n), then halve it.      
 '''
 def f(n, s=False):
-    if n % 2: return n//2
+    if n % 2 == 0: return n//2
     else:
         n = n * 3 + 1
         if s: n //= 2
