@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
         name='3n+1',
         packages=['tnpo'],
-        version='0.2-1-g12551e4',
+        version='0.3',
         description='The cursed 3n+1 problem library.',
         author='thisgary',
         license='MIT',
