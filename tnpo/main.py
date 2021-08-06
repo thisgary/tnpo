@@ -1,22 +1,33 @@
-# 3n+1 problem statement
-'''
-n: int x > 0
-'''
+# Exceptions
+class NoChildException(Exception):
+    def __init__(self, parent):
+        self.p = parent
+        self.message = f'Number {parent} does not have a child.'
+        super().__init__(self.message)
 
 # Function
+def y(x, m=3, c=1): return m*x+c # Linear
+def e(n): return n%2==0 # Even
+
+# 3n+1 Function
 '''
-f(n) = {n//2, if n mod 2 = 0; 
-        3n+1, if n mod 2 = 1}
+n: {int n, n > 0}
+
+f(n) = {n//2   , if n%2==0; 
+        3n+1   , if n%2==1}
+
+g(n) = {n//2   , if n%2==0; 
+        3n+1//2, if n%2==1}
 '''
-def f(n):
-    return n//2 if n%2==0 else 3*n+1
+def f(n): return n//2 if e(n) else y(n)
+def g(n): return n//2 if e(n) else y(n)//2
 
 # Sequence
 '''
-ai = {n      , for i = 0;
-      f(ai-1), for i > 0}
+ai = {n      , for i=0;
+      f(ai-1), for i>0}
 
-i: len(seq) - 1
+i = len(seq) - 1
 '''
 def a(n):
     seq = [n]
@@ -25,15 +36,16 @@ def a(n):
         seq.append(n)
     return seq
 
-# Node function
-'''
-child : 
-parent:  
-'''
-def node(child):
-    if child%2 == 1: n = linear(child)
-    parent = ld2(n)
-    return parent
+# Node
+def parent(c):
+    p = 3*c+1
+    while c%2==0: p//=2
+    return p
+
+def child(p):
+    c = 2*p-1
+    if c%3==0: return c//=3
+    else: raise NoChildException(p)
 
 def draw_tree(nodes):
     nodes.sort()
