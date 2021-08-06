@@ -1,38 +1,29 @@
-# common math functions
-''' y = mx + c '''
-def linear(x, m=3, c=1):
-    return m*x + c
-
-''' Long division by 2 '''
-def ld2(x):
-    return x if x%2 != 0 else ld2(x//2)
-
-''' Is y 2 power n '''
-def is_2n(y):
-    return ld2(y) == 1
-# 3n+1 problem function
+# 3n+1 problem statement
 '''
-f(n) = {n//2, x%2=0; 
-        3n+1, x%2=1}
-
-n: Any positive integer
-
-If x is even, divide by 2,
-if x is odd, 3x + 1.
+n: int x > 0
 '''
-def function(x):
-    return x//2 if x%2 == 0 else linear(x)
 
-# 3n+1 problem sequence function
+# Function
 '''
-step: No. of steps for sequence to reach 1
+f(n) = {n//2, if n mod 2 = 0; 
+        3n+1, if n mod 2 = 1}
 '''
-def sequence(n):
-    step = [n]
+def f(n):
+    return n//2 if n%2==0 else 3*n+1
+
+# Sequence
+'''
+ai = {n      , for i = 0;
+      f(ai-1), for i > 0}
+
+i: len(seq) - 1
+'''
+def a(n):
+    seq = [n]
     while n != 1:
-        n = function(n)
-        step.append(n)
-    return step
+        n = f(n)
+        seq.append(n)
+    return seq
 
 # Node function
 '''
@@ -46,16 +37,17 @@ def node(child):
 
 def draw_tree(nodes):
     nodes.sort()
-    tree = []
-    childs = []
+    tree, childs = [], []
     c_parent = 0
     for node in nodes:
         parent, child = node
-        if len(childs) > 0:
+        if childs:
             if parent == c_parent: childs.append(child)
             else:
                 childs.sort()
-                tree.append((parent,childs))
+                node = c_parent, childs
+                tree.append(node)
+                c_parent, childs = parent, [child]
         else: c_parent, childs = parent, [child]
     return tree
 
