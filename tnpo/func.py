@@ -1,31 +1,39 @@
 '''
 3n + 1 Problem
----------------
-1. Function
----------------
-Given n as any positive integer
-f(n): if n even, n/2; else, 3n+1
+----------------
+Statement
+----------------
+The problem states that for any positive integer, n,
+that perform i times of f(n) will eventually reach 1,
+and stuck in (4, 2, 1) loop afterward.
+
+----------------
+f(n) function
+----------------
+Given function f(n), where n is positive integer,
+if n is odd, triple it and add one, else, halve it.
+
+----------------
+a(n) sequence
+----------------
+Given function a(n), while n is not 4, n = f(n).
+If the problem statement is indeed true, 
+this function will eventually stop at some point,
+thus proving the statement through 'bruteforce' method.
 '''
-def f(n, s=False):
-    m = 2 if s else 1
-    return (3*n+1)//m if n%2 else n//2
 
-def a(n, s=False):
-    l = [n]
-    while n != 1:
-        n = f(n, s)
-        l.append(n)
-    return l
+def f(n):
+    return n*3+1 if n%2 else n//2
 
-def ab(n):
-    while n != 1:
-        if n % 2: n = 3 * n + 1
-        n //= 2
+def a(n):
+    s = ()
+    while n != 4:
+        n = f(n)
+        s += (n,)
+    return s
 
-def R(n, s=False):
+def R(n):
     c = {2*n}
-    m = 2 if s else 1
-    if n%(6//m) == 4//m:
-        c.add((m*n-1)//3)
+    if n%6 == 4: c.add((n-1)//3)
     return c
 
