@@ -1,26 +1,15 @@
-# 3n+1 Problem Function
 '''
-n = 1, 2, 3...
-
-f(n): if n even, halve it;
-else, triple it and add 1. 
-
-s(n): if n even, halve it;
-else, f(n), then halve it. 
+3n + 1 Problem
+---------------
+1. Function
+---------------
+Given n as any positive integer
+f(n): if n even, n/2; else, 3n+1
 '''
 def f(n, s=False):
-    m = 2 if s else 1 # Shortcut
+    m = 2 if s else 1
     return (3*n+1)//m if n%2 else n//2
 
-# Relationship Function
-def R(n, s=False):
-    c = {2*n} # Childs
-    m = 2 if s else 1
-    if n%(6//m) == 4//m:
-        c.add((m*n-1)//3)
-    return c
-
-# Sequence Function
 def a(n, s=False):
     l = [n]
     while n != 1:
@@ -28,9 +17,15 @@ def a(n, s=False):
         l.append(n)
     return l
 
-# Sequence bruteforcing
-def A(n):
+def ab(n):
     while n != 1:
         if n % 2: n = 3 * n + 1
         n //= 2
+
+def R(n, s=False):
+    c = {2*n}
+    m = 2 if s else 1
+    if n%(6//m) == 4//m:
+        c.add((m*n-1)//3)
+    return c
 
