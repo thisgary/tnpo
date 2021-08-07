@@ -23,14 +23,14 @@ def R(n, s=False):
 # Sequence Function
 def a(n, s=False):
     l = [n]
-    while n > 4:
+    while n != 1:
         n = f(n, s)
         l.append(n)
     return l
 
 # Sequence bruteforcing
 def A(n):
-    while n > 4:
+    while n != 1:
         if n % 2: n = 3 * n + 1
         n //= 2
 
