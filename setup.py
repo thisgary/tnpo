@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
         name='tnpo',
-        version='0.5.3',
+        version='0.5.5',
         author='thisgary',
         author_email='gary.github@gmail.com',
         description='The cursed 3n+1 problem library.',
