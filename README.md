@@ -1,4 +1,4 @@
-# TNPO (3n + 1)
+# 3n + 1
 The cursed 3n + 1 problem library that shouldn't exist.
 
 ## Purpose
